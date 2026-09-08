@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package file_service;
+
+service WorkspaceService {
+  rpc GetFileCount(StatsRequest) returns (CountResponse);
+
+  rpc GetLineCount(StatsRequest) returns (CountResponse);
+
+  rpc GetByteSize(StatsRequest) returns (CountResponse);
+
+  rpc GetTopKFiles(TopKRequest) returns (TopKResponse);
+}
+
+message StatsRequest {}
+
+message CountResponse {
+  int64 value = 1;
+}
+
+message TopKRequest {
+  int32 k = 1;
+}
+
+message FileSize {
+  string name = 1;
+  int64 size = 2;
+}
+
+message TopKResponse {
+  repeated FileSize files = 1;
+}
